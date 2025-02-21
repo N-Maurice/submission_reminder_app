@@ -17,15 +17,15 @@ mkdir -p "$main_dir" "$app_dir" "$config_dir" "$modules_dir" "$assets_dir"
 
 #-----------------------------------------------------------------------------------------------
 # Input of file config.env
-cat > "$config_dir/config.env" <<EOL
+cat > "$config_dir/config.env" <<'EOF'
 # This is the config file
 ASSIGNMENT="Shell Navigation"
 DAYS_REMAINING=2
-EOL
+EOF
 
 #-----------------------------------------------------------------------------------------------
 # Input of the functions in the file functions.sh
-cat > "$modules_dir/functions.sh" <<EOL
+cat > "$modules_dir/functions.sh" <<'EOF'
 #!/bin/bash
 
 # Function to read submissions file and output students who have not submitted
@@ -47,11 +47,11 @@ function check_submissions {
     done < <(tail -n +2 "$submissions_file") # Skip the header
 }
 
-EOL
+EOF
 
 #----------------------------------------------------------------------------------------------
 # Creating the reminder script file reminder.sh
-cat > "$app_dir/reminder.sh" <<EOL
+cat > "$app_dir/reminder.sh" <<'EOF'
 #!/bin/bash
 
 # Source environment variables and helper functions
@@ -67,11 +67,11 @@ echo "Days remaining to submit: $DAYS_REMAINING days"
 echo "--------------------------------------------"
 
 check_submissions $submissions_file
-EOL
+EOF
 
 #---------------------------------------------------------------------------------
 # Adding students to submissions.txt
-cat >> "$assets_dir/submissions.txt" <<EOL
+cat >> "$assets_dir/submissions.txt" <<'EOF'
 student, assignment, submission status
 Chinemerem, Shell Navigation, not submitted
 Chiagoziem, Git, submitted
@@ -87,19 +87,20 @@ Christian, Shell Navigation, submitted
 Habeeb, Git, not submitted
 Gilbert, Shell Permissions, submitted
 Placide, Shell Basics, not submitted
-EOL
+EOF
 
 #-------------------------------------------------------------------------------------
 # Create the startup.sh script
-cat > "$main_dir/startup.sh" <<EOL
+cat > "$main_dir/startup.sh" <<'EOF'
 #!/bin/bash
 # Run the reminder script
-Bash app/reminder.sh
-EOL
+bash app/reminder.sh
+EOF
 
 # Make the startup script executable
-chmod +x "$main_dir/startup.sh"
+chmod a+x "$main_dir/startup.sh"
+chmod a+x "$app_dir/reminder.sh"
+chmod a+x "$modules_dir/functions.sh"
 
 # Success message
 echo "Environment setup complete! Run ./startup.sh inside $main_dir to test the application."
-
