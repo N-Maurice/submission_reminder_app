@@ -51,7 +51,7 @@ EOL
 
 #----------------------------------------------------------------------------------------------
 # Creating the reminder script file reminder.sh
-cat > "$reminder_dir/reminder.sh" <<EOL
+cat > "$app_dir/reminder.sh" <<EOL
 #!/bin/bash
 
 # Source environment variables and helper functions
@@ -93,15 +93,8 @@ EOL
 # Create the startup.sh script
 cat > "$main_dir/startup.sh" <<EOL
 #!/bin/bash
-
-# Navigate to the app directory
-cd \$(dirname "\$0")
-
-# Make reminder.sh executable
-chmod +x reminder.sh
-
 # Run the reminder script
-./reminder.sh
+Bash app/reminder.sh
 EOL
 
 # Make the startup script executable
